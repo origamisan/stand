@@ -55,7 +55,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'mysql.sxevegan.com'),
-            'database'  => env('DB_DATABASE', 'xvxstand'),
+            'database'  => env('DB_DATABASE', 'xvxstandup'),
             'username'  => env('DB_USERNAME', 'xvxstand'),
             'password'  => env('DB_PASSWORD', 'xvxstandup'),
             'charset'   => 'utf8',
