@@ -18,7 +18,8 @@ Route::get('/', function () {
 
 Route::get('/change/{new_position}', function ($new_position){
     $last_position = Position::orderBy('position_time','desc')->first();
-    if(\Carbon\Carbon::parse($last_position->position_time)->isToday() && $last_position->position != $new_position){
+    $isToday = \Carbon\Carbon::parse($last_position->position_time)->isToday();
+    if(($isToday && $last_position->position != $new_position) || !($isToday)){
         $position = new Position();
         $position->position=$new_position;
         $position->position_time=\Carbon\Carbon::now('EST');
@@ -32,17 +33,6 @@ Route::get('/current', function (){
     $position = Position::orderBy('position_time','desc')->first();
     return $position;
 });
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
 
 Route::group(['middleware' => ['web']], function () {
     //
